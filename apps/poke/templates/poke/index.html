@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{% load staticfiles %}		
+	<title>Login/Registration</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'poke/index.css' %}">
+</head>
+<body>
+	<div id="container">
+		<h1>Welcome!</h1>
+		<div id="sitecontent">
+			<div id="registerbox">
+			<h4>Register</h4>
+			{% if messages %}
+		    {% for message in messages %}
+		    <p>{{message}}</p>
+		    {% endfor %}
+		    {% endif %}
+				<form action="/register" method="post">
+				{% csrf_token %}
+				Name: <input type="text" name="name">
+				Alias: <input type="text" name="first_name">
+				Email: <input type="email" name="email">
+				Password: <input type="password" name="password">
+				Confirm PW: <input type="password" name="confirmpassword">
+				Date of Birth: <input type="date" name="date">
+				<input type="submit" value="Register" >
+				</form>
+
+			</div>
+
+			<div id="loginbox">
+				<h4>Login</h4>
+				<form action="/login" method="post">
+				{% csrf_token %}
+				Email: <input type="email" name="email">
+				Password: <input type="password" name="password">
+				<input type="submit" value="Login">
+				</form>
+
+			</div>
+		</div>
+	</div>
+	
+</body>
+</html>

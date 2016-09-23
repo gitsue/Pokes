@@ -1,0 +1,23 @@
+#container {
+	width: 970px;
+	padding: 25px;
+}
+
+#header {
+	width: 100%;
+
+}
+
+#pokecounter {
+	width: 25%;
+	border: 1px solid black;
+}
+
+#poketable {
+	width: 100%;
+	border: 2px solid black;
+}
+
+	#poketable table {
+		border: 1px solid black;
+	}

@@ -1,0 +1,24 @@
+#container {
+	width: 970px;
+	padding: 15px;
+}
+
+#sitecontent {
+	width: 100%;
+}
+
+#registerbox {
+	width: 65%;
+	vertical-align: top;
+	display: inline-block;
+	border: 1px solid black;
+}
+	#registerbox p {
+		color: red;
+	}
+
+#loginbox {
+	width: 34%;
+	display: inline-block;
+	border: 1px solid black;
+}
