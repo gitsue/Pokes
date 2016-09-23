@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 from django.db import models
+from django.db.models import F
 import re, bcrypt
 
 email_regex = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
@@ -37,7 +38,10 @@ class UserManager(models.Manager):
 			return user
 		else:
 			return False
-
+	def pokeupdate(self, data):
+		counter = User.objects.filter(id =data).update(poke_count = F('poke_count')+1)
+		print counter
+		
 
 class User(models.Model):
 	name = models.CharField(max_length=255)
@@ -45,7 +49,7 @@ class User(models.Model):
 	email = models.CharField(max_length=255)
 	password = models.CharField(max_length=50)
 	date_of_birth = models.DateTimeField(auto_now_add=False)
-	poke_count = models.TextField(default=0)
+	poke_count = models.IntegerField(default=0)
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now_add=True)
 

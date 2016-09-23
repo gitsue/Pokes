@@ -3,7 +3,7 @@
 <head>
 	{% load staticfiles %}		
 	<title>Pokes</title>
-	<link rel="stylesheet" type="text/css" href="{% static 'poke/success.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'poke/poke.css' %}">
 </head>
 <body>
 	<div id="container">
@@ -14,7 +14,7 @@
 		</div>
 
 		<div id="pokecounter">
-			<p></p>
+			<p> Someone poked you x times</p>
 		</div>
 
 		<div id="poketable">
@@ -36,7 +36,12 @@
 						<td>{{user.alias}}</td>
 						<td>{{user.email}}</td>
 						<td>{{user.poke_count}} Pokes</td>
-						<td><a href="/poke">Poke!</a></td>
+						<td>
+							<form action="/poke/{{user.id}}" method="post">
+								{% csrf_token %}
+								<input type="submit" value="Poke!">
+							</form>
+						</td>
 					</tr>
 				{% endfor %}
 				</tbody>

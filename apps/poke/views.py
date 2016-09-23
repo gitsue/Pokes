@@ -4,6 +4,8 @@ from django.contrib import messages
 
 # Create your views here.
 def index(request):
+	if "user_name" in request.session:
+		return redirect("/pokes")
 	return render(request, 'poke/index.html')
 
 def register(request):
@@ -11,7 +13,7 @@ def register(request):
 		result = User.objects.register(request.POST)
 	if result["registered"]:
 		request.session["user_name"] = result["user"].alias
-		return redirect('/success')
+		return redirect('/pokes')
 	else:
 		print_messages(request, result["errors"])
 		return redirect('/')
@@ -26,15 +28,15 @@ def login(request):
 
 	if user:
 		request.session['user_name'] = user.alias
-		return redirect('/success')
+		return redirect('/pokes')
 
 def success(request):
 	if "user_name" not in request.session:
 		return redirect("/")
-	print request.session["user_name"]
+	# print request.session["user_name"]
 	context = {
 		"users": User.objects.exclude(alias=request.session["user_name"]),
-		"this_user": User.objects.get(alias=request.session["user_name"])
+		"this_user": User.objects.get(alias=request.session["user_name"]),
 	}
 	return render(request, 'poke/pokes.html', context)
 
@@ -43,7 +45,9 @@ def logout(request):
 	return redirect("/")
 
 
-def poke(request):
-	pass
+def poke(request, id):
+	if request.method =="POST":
+		count = User.objects.pokeupdate(id)
+	return redirect("/pokes")
 
 
