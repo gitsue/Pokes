@@ -40,7 +40,6 @@ class UserManager(models.Manager):
 			return False
 	def pokeupdate(self, data):
 		counter = User.objects.filter(id =data).update(poke_count = F('poke_count')+1)
-		print counter
 		
 
 class User(models.Model):
@@ -55,4 +54,9 @@ class User(models.Model):
 
 	objects = UserManager()
 
+# class PokeHistory(models.Model):
+# 	who_poked = models.ForeignKey('User', related_name="useralias")
+# 	created_at = models.DateTimeField(auto_now_add=True)
+# 	updated_at = models.DateTimeField(auto_now_add=True)
+	
 	
